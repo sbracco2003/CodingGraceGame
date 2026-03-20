@@ -638,10 +638,14 @@ def start_new_adventure(player_info_arg):
             room_result = blissful_ignorance_of_illusion_room(player_info_arg)
         elif door.startswith("green"):
             room_result = green_magic_room(player_info_arg)
+        elif door.startswith("sunken"):
+            room_result = sunken_bedroom(player_info_arg)
+        elif door.startswith("kitchen"):
+            room_result = polkadotted_pear_in_kitchen(player_info_arg)
+        elif door.startswith("gold"):
+            room_result = golden_library_room(player_info_arg)
         else:
-            print("Sorry, it's either 'red', 'blue', or 'green' as the "
-                  "answer. You're the weakest link, goodbye!")
-            # Continue the loop so the player can try again.
+            print("Please enter one of the six door names.")
             continue
 
         # If the room returned "flee", we loop back to the door choice.
