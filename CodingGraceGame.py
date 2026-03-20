@@ -439,6 +439,52 @@ def green_magic_room(player_info_arg):
         # The player lost — return to the adventure loop.
         print("The magician waves his hand and you are whisked away...\n")
         return "flee"
+def sunken_bedroom(player_info_arg):
+    """The Sunken Bedroom: play Rock, Paper, Scissors against a shark.
+
+    Returns:
+        "flee" if the player lost RPS (so the adventure loop continues),
+        or raises GameOver (victory) if the player won.
+    """
+    print_shark()
+    print("Welcome to the Sunken Bedroom.")
+    print("Prepare yourself to play a game of Rock, Paper, Scissors... with a shark?")
+    print("If you win, you will receive a decayed shark tooth.")
+    print("If you do not win, you will be dragged to the start of the game.\n")
+
+    # --- Update player state ---
+    player_info_arg["location"] = "Sunken Bedroom"
+
+    special_item = "Decayed Shark Tooth"
+    if special_item not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(special_item)
+        print(f"You found a {special_item} and added it to your inventory!")
+
+    player_info_arg["choices"].append("Sunken Bedroom")
+    show_player_info(player_info_arg)
+
+    # --- Play RPS until the result is not a tie ---
+    # We initialize result to "tie" so the while-loop runs at least once.
+    result = "tie"
+    while result == "tie":
+        # Weighted probabilities: [Rock=0.3, Paper=0.4, Scissors=0.3]
+        _label, _choice, result = rps([0.3, 0.4, 0.3])
+
+        if result == "tie":
+            print("You tied and can play Rock, Paper, Scissors again.\n")
+
+        elif result in ("exit", "invalid"):
+            # The player declined to play or entered invalid input.
+            # Treat this the same as a loss: return to the adventure loop.
+            print("The shark frowns. You must try again later.\n")
+            return "flee"
+
+    if result == "win":
+        you_won("The shark gives you a tooth that fell out a couple weeks ago. nice, I guess?")
+    else:
+        # The player lost — return to the adventure loop.
+        print("The Shark drags you home...\n")
+        return "flee"
 def polkadotted_pear_in_kitchen(player_info_arg):
     #test
     """The Kitchen: a fearsome place where fruits among other foods are cut up and eaten.
