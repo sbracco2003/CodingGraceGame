@@ -439,7 +439,46 @@ def green_magic_room(player_info_arg):
         # The player lost — return to the adventure loop.
         print("The magician waves his hand and you are whisked away...\n")
         return "flee"
+def polkadotted_pear_in_kitchen(player_info_arg):
+    #test
+    """The Kitchen: a fearsome place where fruits among other foods are cut up and eaten.
 
+    Returns:
+        "flee" if the player chose to flee (so the adventure loop continues),
+        or raises GameOver if the player dies.
+    """
+    print_monster()
+    print("\nYou have entered the Kitchen.")
+
+    # --- Update player state ---
+    player_info_arg["location"] = "The Kitchen"
+
+    damage = 45
+    weapon = "The Knife"
+    player_info_arg["health"] -= damage
+    if knowledge not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(weapon)
+        print(f"Cut like a fruit, to be eaten by the blade {damage} health "
+              f"You are no better than {weapon}.")
+
+    player_info_arg["choices"].append("The Kitchen")
+    show_player_info(player_info_arg)
+
+    print("You see the shriveled pear.")
+    print("It? begins to roll faster and grow bigger")
+    print("Do you flee for your life or wield The Knife?")
+
+    next_move = input("> ")
+
+    # Using `in` lets the player type "flee now" or "I flee" and still match.
+    if "flee" in next_move:
+        # Returning "flee" tells the loop in start_new_adventure() to
+        # present the door choice again.  This avoids using recursion,
+        # which would add a new stack frame every time the player flees
+        # and could eventually cause a RecursionError.
+        return "flee"
+    else:
+        you_died("You died. No better than a fruit, huh?")
 
 # ===========================================================================
 # CONTROL FUNCTIONS
