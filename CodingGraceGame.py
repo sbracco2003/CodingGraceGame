@@ -525,6 +525,43 @@ def polkadotted_pear_in_kitchen(player_info_arg):
         return "flee"
     else:
         you_died("You died. No better than a fruit, huh?")
+def golden_library_room(player_info_arg):
+    """The Golden Library: solve a riddle to escape safely."""
+
+    print("\nYou have entered the Golden Library.")
+
+    # --- Update player state ---
+    player_info_arg["location"] = "Golden Library"
+
+    healing = 15
+    relic = "Ancient Key"
+    player_info_arg["health"] += healing
+
+    # Keep health in valid range
+    if player_info_arg["health"] > 200:
+        player_info_arg["health"] = 200
+
+    if relic not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(relic)
+        print(f"You found the {relic} and gained {healing} health.")
+
+    player_info_arg["choices"].append("Golden Library")
+    show_player_info(player_info_arg)
+
+    print("Dusty shelves stretch endlessly around you.")
+    print('A voice whispers: "Answer correctly, and you may leave."')
+    print('What has keys but cannot open locks?')
+    print("Type your answer, or type 'flee' to run away.")
+
+    action = input("> ").strip().lower()
+
+    if "flee" in action:
+        return "flee"
+    elif "piano" in action:
+        print("The shelves slide apart and reveal an exit.")
+        return player_info_arg
+    else:
+        you_died("The library falls silent... then the walls close in on you.")
 
 # ===========================================================================
 # CONTROL FUNCTIONS
