@@ -625,8 +625,8 @@ def start_new_adventure(player_info_arg):
         print_new_dungeon()
         print("You enter a room, and you see a red door to your left "
               "and blue and green doors to your right.")
-        door_picked = input("Do you pick the red door, blue door, "
-                            "or green door? > ")
+        door_picked = input("Do you pick the red door, blue door, green door, sunken door, kitchen door, "
+                            "or gold door? > ")
 
         # We compare only the first few characters so that inputs like
         # "red door", "blue", or "green one" all work.
