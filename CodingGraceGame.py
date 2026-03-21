@@ -446,7 +446,6 @@ def sunken_bedroom(player_info_arg):
         "flee" if the player lost RPS (so the adventure loop continues),
         or raises GameOver (victory) if the player won.
     """
-    print_shark()
     print("Welcome to the Sunken Bedroom.")
     print("Prepare yourself to play a game of Rock, Paper, Scissors... with a shark?")
     print("If you win, you will receive a decayed shark tooth.")
@@ -502,7 +501,7 @@ def polkadotted_pear_in_kitchen(player_info_arg):
     damage = 45
     weapon = "The Knife"
     player_info_arg["health"] -= damage
-    if knowledge not in player_info_arg["inventory"]:
+    if weapon not in player_info_arg["inventory"]:
         player_info_arg["inventory"].append(weapon)
         print(f"Cut like a fruit, to be eaten by the blade {damage} health "
               f"You are no better than {weapon}.")
